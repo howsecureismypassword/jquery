@@ -9,16 +9,16 @@ main.setCheckerDictionary(require("checker/checker-dictionary"));
 
 (function ($) {
     var createOutputDiv = function (input) {
-        var div = $("<div />").addClass("hsimp-results"),
+        var parent = input.offsetParent(),
+            div = $("<div />").addClass("hsimp-results"),
             pos = input.position(),
             padding = {
                 top: +(input.css("padding-top").replace("px", "")),
-                bottom: +(input.css("padding-bottom").replace("px", "")),
-                left: +(input.css("padding-left").replace("px", "")),
-                right: +(input.css("padding-right").replace("px", ""))
+                bottom: +(input.css("padding-bottom").replace("px", ""))
             }
 
-        div.width(input.width() + padding.left + padding.right);
+        div.width(parent.width() - pos.left);
+
         div.css({
             left: pos.left,
             top: pos.top + input.height() + padding.top + padding.bottom
@@ -43,7 +43,10 @@ main.setCheckerDictionary(require("checker/checker-dictionary"));
         input.after(outputDiv);
 
         var result = $("<p />").addClass("hsimp-results__time"),
+            resultText = $("<span />"),
             checks = $("<ul />").addClass("hsimp-results__checks");
+
+        result.append($("<strong/ >").text("Time to crack: "), resultText);
 
         outputDiv.append(result, checks);
 
@@ -54,12 +57,12 @@ main.setCheckerDictionary(require("checker/checker-dictionary"));
             if (value.length) {
                 input.addClass("hsimp-level--" + password.getSecurityLevel());
                 outputDiv.fadeIn();
-                result.text(password.getString());
+                resultText.text(password.getString());
                 checks.html(L.map(listify, password.getChecks()));
             } else {
                 input.removeClass("hsimp-level--insecure hsimp-level--bad hsimp-level--ok hsimp-level--good");
                 outputDiv.fadeOut();
-                result.empty();
+                resultText.empty();
                 checks.empty();
             }
         });

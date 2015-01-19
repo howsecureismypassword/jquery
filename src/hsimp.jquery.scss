@@ -9,11 +9,18 @@ $green: #2F8249;
     &-results {
         position: absolute;
         background: #fff;
-        background: rgba(255,255,255,0.8);
+        background: rgba(255,255,255,0.9);
         border: 1px solid #ccc;
         font-size: 0.8em;
 
+        &__time {
+            padding: 5px;
+            margin: 0;
+            line-height: 1.25em;
+        }
+
         &__checks {
+            margin: 0;
             padding: 0;
         }
 
@@ -21,20 +28,29 @@ $green: #2F8249;
             list-style: none;
             border-top: 1px solid #ccc;
             padding: 5px;
+            line-height: 1.25em;
         }
     }
 
-    &-check__header {
-        &--insecure, &--warning {
-            color: $red;
+    &-check {
+        &__header {
+            margin: 0;
+
+            &--insecure, &--warning {
+                color: $red;
+            }
+
+            &--notice {
+                color: $orange;
+            }
+
+            &--achievement {
+                color: $green;
+            }
         }
 
-        &--notice {
-            color: $orange;
-        }
-
-        &--achievement {
-            color: $green;
+        &__message {
+            margin: 0;
         }
     }
 
@@ -57,4 +73,3 @@ $green: #2F8249;
         }
     }
 }
-
