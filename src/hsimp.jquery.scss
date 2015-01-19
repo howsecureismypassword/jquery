@@ -1,22 +1,30 @@
-@import "compass/css3/transition";
+@import "compass/css3";
 
 // Define colours
 $red: #C63136;
 $orange: #DE7B46;
 $green: #2F8249;
+$black: #666;
+$white: #fff;
+
+$padding: 10px;
 
 .hsimp {
     &-results {
+        color: $black;
         position: absolute;
+        @include box-sizing(border-box);
         background: #fff;
         background: rgba(255,255,255,0.9);
         border: 1px solid #ccc;
-        font-size: 0.8em;
+        font-size: 12px;
+        @include border-radius(0 0 $padding $padding);
 
         &__time {
-            padding: 5px;
+            padding: $padding;
             margin: 0;
             line-height: 1.25em;
+            font-size: 14px;
         }
 
         &__checks {
@@ -27,26 +35,32 @@ $green: #2F8249;
         &__check {
             list-style: none;
             border-top: 1px solid #ccc;
-            padding: 5px;
+            padding: $padding;
             line-height: 1.25em;
         }
     }
 
     &-check {
+
+        &--insecure {
+            background: $red;
+            color: $white;
+        }
+
+        &--warning {
+            color: $red;
+        }
+
+        &--notice {
+            color: $orange;
+        }
+
+        &--achievement {
+            color: $green;
+        }
+
         &__header {
             margin: 0;
-
-            &--insecure, &--warning {
-                color: $red;
-            }
-
-            &--notice {
-                color: $orange;
-            }
-
-            &--achievement {
-                color: $green;
-            }
         }
 
         &__message {

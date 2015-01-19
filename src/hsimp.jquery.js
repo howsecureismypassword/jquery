@@ -7,6 +7,10 @@ main.setNamedNumberDictionary(require("named-number/named-number-dictionary"));
 main.setPeriodDictionary(require("period/period-dictionary"));
 main.setCheckerDictionary(require("checker/checker-dictionary"));
 
+var filterHSIMPOptions = L.filter(function (value, key) {
+    return ["calculationsPerSecond", "ok", "good"].indexOf(key) !== -1;
+});
+
 (function ($) {
     var createOutputDiv = function (input) {
         var parent = input.offsetParent(),
@@ -17,7 +21,7 @@ main.setCheckerDictionary(require("checker/checker-dictionary"));
                 bottom: +(input.css("padding-bottom").replace("px", ""))
             }
 
-        div.width(parent.width() - pos.left);
+        div.css("max-width", parent.width() - pos.left - 2);
 
         div.css({
             left: pos.left,
@@ -28,10 +32,19 @@ main.setCheckerDictionary(require("checker/checker-dictionary"));
     };
 
     var listify = function (item) {
-        var header = $("<h4 />").text(item.name).addClass("hsimp-check__header").addClass("hsimp-check__header--" + item.level),
-            message = $("<p />").text(item.message).addClass("hsimp-check__message");
+        var header = $("<h4 />").text(item.name).addClass("hsimp-check__header"),
+            message = $("<p />").text(item.message).addClass("hsimp-check__message").hide(),
+            li = $("<li />").append(header,message).addClass("hsimp-check--" + item.level).addClass("hsimp-results__check");
 
-        return $("<li />").append(header, message).addClass("hsimp-results__check");
+        li.on("mouseenter", function () {
+            message.slideDown();
+        });
+
+        li.on("mouseleave", function () {
+            message.slideUp();
+        });
+
+        return li;
     };
 
     var setup = function (index, item) {
@@ -50,25 +63,39 @@ main.setCheckerDictionary(require("checker/checker-dictionary"));
 
         outputDiv.append(result, checks);
 
+        var lastResults = false;
+
         input.on("keyup", function () {
             var value = input.val(),
                 password = main(value);
 
             if (value.length) {
+                lastResults = true;
                 input.addClass("hsimp-level--" + password.getSecurityLevel());
                 outputDiv.fadeIn();
                 resultText.text(password.getString());
                 checks.html(L.map(listify, password.getChecks()));
             } else {
+                lastResults = false;
                 input.removeClass("hsimp-level--insecure hsimp-level--bad hsimp-level--ok hsimp-level--good");
                 outputDiv.fadeOut();
-                resultText.empty();
                 checks.empty();
+            }
+        });
+
+        input.on("blur", function () {
+            outputDiv.fadeOut();
+        });
+
+        input.on("focus", function () {
+            if (lastResults) {
+                outputDiv.fadeIn();
             }
         });
     };
 
     $.fn.hsimp = function (options) {
+        main.setOptions(filterHSIMPOptions(options));
         $(this).each(setup);
     };
 }(jQuery))
