@@ -6,7 +6,8 @@
 			"path": ".",
             "folder_exclude_patterns": [
                 "node_modules/",
-                ".sass-cache/"
+                ".sass-cache/",
+                "build/vendor"
             ],
             "file_exclude_patterns": [
                 "*.concat.js",
