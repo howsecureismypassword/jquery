@@ -17,5 +17,6 @@
     "strict": true,
     "smarttabs": true,
     "globals": {
+        "jQuery": false
     }
 }
