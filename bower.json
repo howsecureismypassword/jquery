@@ -1,0 +1,37 @@
+{
+  "name": "how-secure-is-my-password--jquery",
+  "version": "0.1.0",
+  "homepage": "https://github.com/howsecureismypassword/jquery",
+  "authors": [
+    "Mark Wales <mark@smallhadroncollider.com>"
+  ],
+  "description": "The \"How Secure is My Password?\" password strength meter for your own site as a jQuery plugin",
+  "main": "build/hsimp.jquery.min.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "jquery-plugin",
+    "jquery",
+    "plugin",
+    "password",
+    "security",
+    "how",
+    "secure",
+    "is",
+    "my",
+    "hsimp",
+    "strength",
+    "meter",
+    "test"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "jquery": "1.*"
+  }
+}

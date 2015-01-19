@@ -1,0 +1,89 @@
+@import "compass/css3";
+
+// Define colours
+$red: #C63136;
+$orange: #DE7B46;
+$green: #2F8249;
+$black: #666;
+$white: #fff;
+
+$padding: 10px;
+
+.hsimp {
+    &-results {
+        color: $black;
+        position: absolute;
+        @include box-sizing(border-box);
+        background: #fff;
+        background: rgba(255,255,255,0.9);
+        border: 1px solid #ccc;
+        font-size: 12px;
+        @include border-radius(0 0 $padding $padding);
+
+        &__time {
+            padding: $padding;
+            margin: 0;
+            line-height: 1.25em;
+            font-size: 14px;
+        }
+
+        &__checks {
+            margin: 0;
+            padding: 0;
+        }
+
+        &__check {
+            list-style: none;
+            border-top: 1px solid #ccc;
+            padding: $padding;
+            line-height: 1.25em;
+        }
+    }
+
+    &-check {
+
+        &--insecure {
+            background: $red;
+            color: $white;
+        }
+
+        &--warning {
+            color: $red;
+        }
+
+        &--notice {
+            color: $orange;
+        }
+
+        &--achievement {
+            color: $green;
+        }
+
+        &__header {
+            margin: 0;
+        }
+
+        &__message {
+            margin: 0;
+        }
+    }
+
+    &-level {
+        color: #fff;
+        color: rgba(255, 255, 255, 0.9);
+        @include transition(background 0.5s linear);
+        background-color: #fff;
+
+        &--bad, &--insecure {
+            background-color: $red;
+        }
+
+        &--ok {
+            background-color: $orange;
+        }
+
+        &--good {
+            background-color: $green;
+        }
+    }
+}

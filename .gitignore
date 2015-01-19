@@ -1,0 +1,11 @@
+# Node
+node_modules/
+
+# bower
+build/vendor/
+
+# Compass
+.sass-cache/
+
+# Makefile
+*.ref
