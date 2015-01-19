@@ -1,0 +1,60 @@
+@import "compass/css3/transition";
+
+// Define colours
+$red: #C63136;
+$orange: #DE7B46;
+$green: #2F8249;
+
+.hsimp {
+    &-results {
+        position: absolute;
+        background: #fff;
+        background: rgba(255,255,255,0.8);
+        border: 1px solid #ccc;
+        font-size: 0.8em;
+
+        &__checks {
+            padding: 0;
+        }
+
+        &__check {
+            list-style: none;
+            border-top: 1px solid #ccc;
+            padding: 5px;
+        }
+    }
+
+    &-check__header {
+        &--insecure, &--warning {
+            color: $red;
+        }
+
+        &--notice {
+            color: $orange;
+        }
+
+        &--achievement {
+            color: $green;
+        }
+    }
+
+    &-level {
+        color: #fff;
+        color: rgba(255, 255, 255, 0.9);
+        @include transition(background 0.5s linear);
+        background-color: #fff;
+
+        &--bad, &--insecure {
+            background-color: $red;
+        }
+
+        &--ok {
+            background-color: $orange;
+        }
+
+        &--good {
+            background-color: $green;
+        }
+    }
+}
+
