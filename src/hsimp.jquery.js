@@ -3,10 +3,22 @@
 var main = require("hsimp-main");
 var L = require("hsimp-library");
 
+// setup language
 main.setNamedNumberDictionary(require("hsimp-named-number/named-number-dictionary"));
 main.setPeriodDictionary(require("hsimp-period/period-dictionary"));
 main.setCheckerDictionary(require("hsimp-checker/checker-dictionary"));
-main.setCheckerChecks(require("hsimp-checker/checks/patterns").concat(require("hsimp-checker/checks/top10k")));
+
+// setup characters sets
+main.setCharacterSets(require("hsimp-character-sets/character-sets.json"));
+
+// setup checks
+var patternCheck = require("hsimp-checks/checks/patterns");
+var commonCheck = require("hsimp-checks/checks/common");
+
+patternCheck.setDictionary(require("hsimp-checks/dictionaries/patterns.json"));
+commonCheck.setDictionary(require("hsimp-checks/dictionaries/top10k.json"));
+
+main.setCheckerChecks([patternCheck, commonCheck]);
 
 var filterHSIMPOptions = L.filter(function (value, key) {
     return ["calculationsPerSecond", "ok", "good"].indexOf(key) !== -1;
