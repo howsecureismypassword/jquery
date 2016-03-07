@@ -1,6 +1,6 @@
 {
   "name": "how-secure-is-my-password--jquery",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "How Secure Is My Password? jQuery Plugin",
   "author": "Small Hadron Collider",
   "license": "MIT",
@@ -9,11 +9,8 @@
     "url": "http://github.com/howsecureismypassword/jquery.git"
   },
   "dependencies": {
-    "main": "git://github.com/howsecureismypassword/modules-main.git#develop",
-    "named-numbers": "git://github.com/howsecureismypassword/modules-named-number.git#develop",
-    "period": "git://github.com/howsecureismypassword/modules-period.git#develop",
-    "checker": "git://github.com/howsecureismypassword/modules-checker.git#develop",
-    "library": "git://github.com/howsecureismypassword/modules-library.git#develop"
+    "hsimp-main": "0.1.4",
+    "hsimp-checks": "0.1.2"
   },
   "devDependencies": {
     "browserify": "8.*",
