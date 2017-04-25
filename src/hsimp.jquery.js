@@ -7,6 +7,8 @@ var filterHSIMPOptions = L.filter(function (value, key) {
     return ["calculationsPerSecond", "ok", "good"].indexOf(key) !== -1;
 });
 
+var allClasses = ["hsimp-level--insecure", "hsimp-level--bad", "hsimp-level--ok", "hsimp-level--good"];
+
 (function ($) {
     var createOutputDiv = function (input) {
         var parent = input.offsetParent(),
@@ -67,13 +69,14 @@ var filterHSIMPOptions = L.filter(function (value, key) {
 
             if (value.length) {
                 lastResults = true;
+                input.removeClass(allClasses.join(" "));
                 input.addClass("hsimp-level--" + password.getSecurityLevel());
                 outputDiv.fadeIn();
                 resultText.text(password.getString());
                 checks.html(L.map(listify, password.getChecks()));
             } else {
                 lastResults = false;
-                input.removeClass("hsimp-level--insecure hsimp-level--bad hsimp-level--ok hsimp-level--good");
+                input.removeClass(allClasses.join(" "));
                 outputDiv.fadeOut();
                 checks.empty();
             }
