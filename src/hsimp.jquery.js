@@ -10,6 +10,8 @@ var filterHSIMPOptions = L.filter(function (value, key) {
 var allClasses = ["hsimp-level--insecure", "hsimp-level--bad", "hsimp-level--ok", "hsimp-level--good"];
 
 (function ($) {
+    var timeToCrack = "Time to crack";
+
     var createOutputDiv = function (input) {
         var parent = input.offsetParent(),
             div = $("<div />").addClass("hsimp-results"),
@@ -57,7 +59,7 @@ var allClasses = ["hsimp-level--insecure", "hsimp-level--bad", "hsimp-level--ok"
             resultText = $("<span />"),
             checks = $("<ul />").addClass("hsimp-results__checks");
 
-        result.append($("<strong/ >").text("Time to crack: "), resultText);
+        result.append($("<strong/ >").text(timeToCrack + ": "), resultText);
 
         outputDiv.append(result, checks);
 
@@ -95,6 +97,24 @@ var allClasses = ["hsimp-level--insecure", "hsimp-level--bad", "hsimp-level--ok"
 
     $.fn.hsimp = function (options) {
         main.setOptions(filterHSIMPOptions(options));
+        
+        if (options.language.main) {
+            main.setDictionary(options.language.main);
+            timeToCrack = options.language.main.timeToCrack;
+        }
+
+        if (options.language.periods) {
+            main.setPeriodDictionary(options.language.periods);
+        }
+
+        if (options.language.namedNumbers) {
+            main.setNamedNumberDictionary(options.language.namedNumbers);
+        }
+
+        if (options.language.checks) {
+            main.setCheckerDictionary(options.language.checks);
+        }
+
         $(this).each(setup);
     };
 }(jQuery))
