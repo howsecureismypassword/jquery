@@ -47,6 +47,25 @@ var allClasses = ["hsimp-level--insecure", "hsimp-level--bad", "hsimp-level--ok"
         return li;
     };
 
+    var setLanguage = function (language) {
+        if (language.main) {
+            main.setDictionary(language.main);
+            timeToCrack = language.main.timeToCrack;
+        }
+
+        if (language.periods) {
+            main.setPeriodDictionary(language.periods);
+        }
+
+        if (language.namedNumbers) {
+            main.setNamedNumberDictionary(language.namedNumbers);
+        }
+
+        if (language.checks) {
+            main.setCheckerDictionary(language.checks);
+        }
+    }
+
     var setup = function (index, item) {
         var input = $(item);
 
@@ -98,21 +117,8 @@ var allClasses = ["hsimp-level--insecure", "hsimp-level--bad", "hsimp-level--ok"
     $.fn.hsimp = function (options) {
         main.setOptions(filterHSIMPOptions(options));
         
-        if (options.language.main) {
-            main.setDictionary(options.language.main);
-            timeToCrack = options.language.main.timeToCrack;
-        }
-
-        if (options.language.periods) {
-            main.setPeriodDictionary(options.language.periods);
-        }
-
-        if (options.language.namedNumbers) {
-            main.setNamedNumberDictionary(options.language.namedNumbers);
-        }
-
-        if (options.language.checks) {
-            main.setCheckerDictionary(options.language.checks);
+        if (options.language) {
+            setLanguage(options.language);
         }
 
         $(this).each(setup);
