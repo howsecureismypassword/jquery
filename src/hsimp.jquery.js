@@ -117,7 +117,7 @@ var allClasses = ["hsimp-level--insecure", "hsimp-level--bad", "hsimp-level--ok"
     $.fn.hsimp = function (options) {
         main.setOptions(filterHSIMPOptions(options));
         
-        if (options.language) {
+        if (options && options.language) {
             setLanguage(options.language);
         }
 
